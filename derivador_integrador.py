@@ -26,7 +26,7 @@ mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 counter = 0
 
 # Derivator Variable declarations
-dt = 0.001
+dt = 0.1
 T  = 10
 L  = 3 # Gain on robust derivator
 v0 = 0
@@ -51,7 +51,7 @@ print('-' * 57)
 time.sleep(1)
 print('START')
 # Main program loop.
-for j in range (10000):
+for j in range (100):
     # Read all the ADC channel values in a list.
     values = [0]*8
     volt_values = [0]*8
@@ -94,7 +94,10 @@ print('STOP')
 print(pot_values)
 print(der_values)
 
-ax1.plot(pot_values, 'r')
-ax2.plot(der_values, 'b')
-ax3.plot(int_values, 'g')
+ax1.plot(time_values, pot_values, 'r')
+ax2.plot(time_values, der_values, 'b')
+ax3.plot(time_values, int_values, 'g')
+ax1.grid()
+ax2.grid()
+ax3.grid()
 plt.show()
